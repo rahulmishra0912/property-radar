@@ -16,11 +16,19 @@ async function main() {
 
   const { PrismaClient } = await import("@prisma/client");
   const prisma = new PrismaClient();
-  const n = await prisma.project.count();
-  await prisma.$disconnect();
+  try {
+    const n = await prisma.project.count();
 
-  if (n === 0) {
-    execSync("npx tsx prisma/seed.ts", { stdio: "inherit", cwd: root });
+    if (n === 0) {
+      await prisma.$disconnect();
+      execSync("npx tsx prisma/seed.ts", { stdio: "inherit", cwd: root });
+      return;
+    }
+
+    const { runCatalogRefresh } = await import("../src/ingestion/sync");
+    await runCatalogRefresh(prisma);
+  } finally {
+    await prisma.$disconnect();
   }
 }
 

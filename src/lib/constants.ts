@@ -25,9 +25,10 @@ export const RERA_STATUS_LABEL: Record<string, string> = {
   LAPSED: "Lapsed",
   EXPIRED: "Expired",
   REVOKED: "Revoked",
+  UNVERIFIED: "Unverified",
 };
 
 export const DISCLAIMER =
   "Informational only — not legal or financial advice. Verify independently on Karnataka RERA and other public records before you act.";
 
-export const SEARCH_HINTS = ["Whitefield", "Summit", "Hebbal", "PRM/KA"] as const;
+export const SEARCH_HINTS = ["Brigade", "Prestige", "Sobha", "Whitefield"] as const;

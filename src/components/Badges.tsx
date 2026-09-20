@@ -6,6 +6,7 @@ const TONE: Record<string, string> = {
   LAPSED: "bg-alert-soft text-alert",
   EXPIRED: "bg-alert-soft text-alert",
   REVOKED: "bg-alert-soft text-alert",
+  UNVERIFIED: "bg-cream text-navy",
 };
 
 export function StatusBadge({ status }: { status: string }) {

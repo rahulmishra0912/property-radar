@@ -52,7 +52,8 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-line/80">
         <p className="mx-auto max-w-6xl px-4 py-4 text-xs text-ink/40">
-          MVP seed data · no live government scraping · © {new Date().getFullYear()}
+          Bengaluru builder catalog · midnight IST refresh · no live government scraping · ©{" "}
+          {new Date().getFullYear()}
         </p>
       </div>
     </footer>

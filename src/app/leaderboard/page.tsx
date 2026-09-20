@@ -38,7 +38,7 @@ export default async function LeaderboardPage() {
       <Crumbs items={[{ href: "/", label: "Home" }, { label: "Leaderboard" }]} />
       <h1 className="serif mt-3 text-3xl text-navy">Bengaluru leaderboard</h1>
       <p className="mt-2 max-w-2xl text-sm text-muted">
-        Ranked from this MVP seed — not official RERA rankings. Compare, then open a report card.
+        Ranked from the Bengaluru builder catalog — not official RERA rankings. Compare, then open a report card.
       </p>
       <div className="mt-4">
         <DisclaimerBanner compact />

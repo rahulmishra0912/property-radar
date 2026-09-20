@@ -19,6 +19,19 @@ export function formatMonth(value: Date | string) {
   return MONTH.format(new Date(value));
 }
 
+const DATETIME = new Intl.DateTimeFormat("en-IN", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+  hour: "numeric",
+  minute: "2-digit",
+  timeZone: "Asia/Kolkata",
+});
+
+export function formatDateTime(value: Date | string) {
+  return DATETIME.format(new Date(value));
+}
+
 export function averageRating(ratings: number[]) {
   if (ratings.length === 0) return null;
   const sum = ratings.reduce((a, b) => a + b, 0);
