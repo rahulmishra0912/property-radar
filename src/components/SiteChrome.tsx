@@ -4,7 +4,7 @@ import { BrandMark } from "@/components/BrandLogo";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-line/80 bg-paper/90 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-line/80 bg-white/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
         <Link href="/" className="inline-flex min-w-0 items-center" aria-label="PropertyRadar home">
           <Image
@@ -31,7 +31,7 @@ export function SiteHeader() {
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t border-line bg-cream text-ink">
+    <footer className="mt-auto border-t border-line bg-white text-ink">
       <div className="mx-auto max-w-6xl px-4 py-10 text-sm leading-6 text-muted">
         <div className="flex items-start gap-3">
           <BrandMark className="mt-0.5 h-9 w-9 shrink-0" />
