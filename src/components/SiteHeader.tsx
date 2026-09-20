@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SearchBox } from "@/components/SearchBox";
+import { withBasePath } from "@/lib/site";
 
 const NAV = [
   { href: "/search", label: "Search" },
@@ -19,12 +20,12 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
         <Link href="/" className="inline-flex min-w-0 items-center" aria-label="PropertyRadar home">
           <Image
-            src="/logo.png"
+            src={withBasePath("/logo.png")}
             alt="PropertyRadar"
-            width={974}
-            height={284}
+            width={1859}
+            height={516}
             priority
-            className="h-9 w-auto max-w-[200px] object-contain object-left sm:h-10 sm:max-w-[240px]"
+            className="h-9 w-auto max-w-[220px] object-contain object-left sm:h-11 sm:max-w-[280px]"
           />
         </Link>
         {showHeaderSearch ? (
