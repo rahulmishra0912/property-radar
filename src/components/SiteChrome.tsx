@@ -26,6 +26,39 @@ export function SiteFooter() {
           </p>
         </div>
         <div className="grid grid-cols-2 gap-6">
+export function SiteHeader() {
+  return (
+    <header className="sticky top-0 z-40 border-b border-line/80 bg-white/90 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
+        <Link href="/" className="inline-flex min-w-0 items-center" aria-label="PropertyRadar home">
+          <Image
+            src="/logo.png"
+            alt="PropertyRadar"
+            width={974}
+            height={284}
+            priority
+            className="h-11 w-auto max-w-[min(100%,240px)] object-contain object-left sm:h-12 sm:max-w-[320px]"
+          />
+        </Link>
+        <nav className="flex shrink-0 items-center gap-4 text-sm font-medium text-navy-2">
+          <Link href="/search" className="hover:text-teal">
+            Search
+          </Link>
+          <Link href="/leaderboard" className="hover:text-teal">
+            Leaderboard
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
+}
+
+export function SiteFooter() {
+  return (
+    <footer className="mt-auto border-t border-line bg-white text-ink">
+      <div className="mx-auto max-w-6xl px-4 py-10 text-sm leading-6 text-muted">
+        <div className="flex items-start gap-3">
+          <BrandMark className="mt-0.5 h-9 w-9 shrink-0" />
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-navy">Explore</p>
             <ul className="mt-2 space-y-1.5">
