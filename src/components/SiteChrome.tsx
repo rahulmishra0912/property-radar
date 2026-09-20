@@ -13,7 +13,7 @@ export function SiteHeader() {
             width={974}
             height={284}
             priority
-            className="h-9 w-auto max-w-[min(100%,220px)] object-contain object-left sm:h-10 sm:max-w-[280px]"
+            className="h-11 w-auto max-w-[min(100%,240px)] object-contain object-left sm:h-12 sm:max-w-[320px]"
           />
         </Link>
         <nav className="flex shrink-0 items-center gap-4 text-sm font-medium text-navy-2">
