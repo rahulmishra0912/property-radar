@@ -37,6 +37,8 @@ model Project {
   projectType        String
   totalUnits         Int?
   lastVerifiedAt     DateTime
+  externalKey        String?   @unique
+  source             String    @default("SEED")
   developerId        String
   developer          Developer @relation(fields: [developerId], references: [id], onDelete: Cascade)
   reviews            Review[]
@@ -45,6 +47,18 @@ model Project {
   @@index([name])
   @@index([reraId])
   @@index([locality])
+  @@index([source])
+}
+
+model IngestionRun {
+  id                   String    @id @default(cuid())
+  startedAt            DateTime  @default(now())
+  finishedAt           DateTime?
+  status               String
+  source               String
+  developersUpserted   Int       @default(0)
+  projectsUpserted     Int       @default(0)
+  error                String?
 }
 
 model Review {

@@ -42,7 +42,7 @@ export default async function DeveloperPage({ params }: Props) {
       <p className="mt-2 text-sm text-muted">
         {developer.city}
         {developer.foundedYear ? ` · est. ${developer.foundedYear}` : ""} · {developer.projects.length}{" "}
-        projects in seed
+        catalogued projects
       </p>
       <div className="mt-4">
         <DisclaimerBanner compact />

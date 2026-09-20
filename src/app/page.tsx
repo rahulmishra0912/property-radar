@@ -4,12 +4,12 @@ import { SEARCH_HINTS } from "@/lib/constants";
 import { SearchBox } from "@/components/SearchBox";
 import { FlagChip, StatusBadge } from "@/components/Badges";
 import { prisma } from "@/lib/prisma";
-import { averageRating, formatMonth } from "@/lib/format";
+import { averageRating, formatDateTime, formatMonth } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [delayed, rated, sample] = await Promise.all([
+  const [delayed, rated, sample, lastRun] = await Promise.all([
     prisma.project.findMany({
       where: { delayMonths: { gt: 0 } },
       include: { developer: true, reviews: true },
@@ -18,12 +18,16 @@ export default async function HomePage() {
     }),
     prisma.project.findMany({
       include: { developer: true, reviews: true },
-      take: 24,
+      take: 200,
     }),
     prisma.project.findFirst({
       where: { delayMonths: { gte: 20 } },
       include: { developer: true },
       orderBy: { delayMonths: "desc" },
+    }),
+    prisma.ingestionRun.findFirst({
+      where: { status: "SUCCESS" },
+      orderBy: { finishedAt: "desc" },
     }),
   ]);
 
@@ -47,9 +51,9 @@ export default async function HomePage() {
             Type a project. Open the report card.
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-muted md:text-base">
-            Instant due-diligence for homebuyers: RERA status, promised vs actual
-            possession, litigation flags, and crowd reviews — built to forward on
-            WhatsApp.
+            Instant due-diligence for homebuyers covering Brigade, Prestige, Sobha,
+            Sumadhura, Godrej and other large Bengaluru promoters: possession windows,
+            catalogued record fields, and crowd reviews — built to forward on WhatsApp.
           </p>
           <div className="mt-8 text-left text-ink">
             <SearchBox autoFocus />
@@ -104,7 +108,9 @@ export default async function HomePage() {
         <div className="mb-4 flex items-end justify-between">
           <div>
             <h2 className="serif text-2xl text-navy">Most delayed</h2>
-            <p className="mt-1 text-sm text-muted">From seed possession dates — tap a card to read why.</p>
+            <p className="mt-1 text-sm text-muted">
+              Recalculated every night at midnight IST from catalogued possession dates.
+            </p>
           </div>
           <Link href="/leaderboard" className="text-sm font-semibold text-teal hover:text-teal-2">
             Full leaderboard →
@@ -166,6 +172,11 @@ export default async function HomePage() {
             <Link className="font-semibold text-teal" href={`/projects/${sample.slug}`}>
               {sample.name}
             </Link>
+          </p>
+        ) : null}
+        {lastRun?.finishedAt ? (
+          <p className="mt-3 text-center text-xs text-muted">
+            Catalog last refreshed {formatDateTime(lastRun.finishedAt)} IST
           </p>
         ) : null}
       </section>

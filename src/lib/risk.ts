@@ -23,6 +23,7 @@ export function riskScore(input: RiskInput) {
   if (input.reraStatus === "LAPSED" || input.reraStatus === "EXPIRED") score += 16;
   if (input.reraStatus === "REVOKED") score += 28;
   if (input.reraStatus === "EXTENDED") score += 6;
+  if (input.reraStatus === "UNVERIFIED") score += 4;
   if (input.avgRating != null && input.avgRating <= 2.5) score += 12;
   if (input.avgRating != null && input.avgRating >= 4.2) score -= 8;
   score += Math.min(12, input.redFlagCount * 2);
@@ -54,7 +55,7 @@ export function riskSummary(input: RiskInput) {
     );
   } else if (input.actualPossession) {
     bits.push(
-      `Seed records show handover around ${formatMonth(input.actualPossession)}, in line with the promised date.`,
+      `Records show handover around ${formatMonth(input.actualPossession)}, in line with the promised date.`,
     );
   } else {
     bits.push(
@@ -74,9 +75,13 @@ export function riskSummary(input: RiskInput) {
     bits.push(
       `RERA validity is marked ${input.reraStatus.toLowerCase()} in this file. That is a hard stop-the-line item before any booking.`,
     );
+  } else if (input.reraStatus === "UNVERIFIED") {
+    bits.push(
+      `RERA status is unverified in the catalog. Confirm registration, validity, and the official PRM/KA number on Karnataka RERA before you act.`,
+    );
   } else if (input.reraStatus === "REVOKED") {
     bits.push(
-      `RERA registration is marked revoked in this seed. Treat this as a high-severity public-record style flag.`,
+      `RERA registration is marked revoked in this file. Treat this as a high-severity public-record style flag.`,
     );
   }
 

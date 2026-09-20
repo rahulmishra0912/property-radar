@@ -11,6 +11,7 @@
     "lint": "eslint",
     "setup": "tsx scripts/ensure-db.ts",
     "db:seed": "tsx prisma/seed.ts",
+    "db:refresh": "tsx scripts/refresh-properties.ts",
     "db:reset": "npx prisma db push --force-reset && tsx prisma/seed.ts"
   },
   "dependencies": {

@@ -12,6 +12,7 @@ import { projectCardInclude } from "@/lib/search";
 import { averageRating, formatDate, formatMonth } from "@/lib/format";
 import { riskSummary } from "@/lib/risk";
 import { PROJECT_TYPES, RED_FLAG_CATEGORIES } from "@/lib/constants";
+import { CATALOG_SOURCE } from "@/ingestion/sync";
 
 export const dynamic = "force-dynamic";
 
@@ -113,7 +114,10 @@ export default async function ProjectPage({ params }: Props) {
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-radar">
             PropertyRadar · report card
           </p>
-          <p className="text-xs text-muted">Last verified {formatDate(project.lastVerifiedAt)}</p>
+          <p className="text-xs text-muted">
+            Last verified {formatDate(project.lastVerifiedAt)}
+            {project.source === CATALOG_SOURCE ? " · builder catalog" : ""}
+          </p>
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <StatusBadge status={project.reraStatus} />
@@ -136,6 +140,11 @@ export default async function ProjectPage({ params }: Props) {
               RERA ID <RecordTag />
             </dt>
             <dd className="mt-1 font-semibold break-all">{project.reraId}</dd>
+            {project.reraId.startsWith("UNVERIFIED/") ? (
+              <p className="mt-1 text-[11px] font-normal leading-4 text-muted">
+                Catalog placeholder — confirm the Karnataka RERA number on the official portal.
+              </p>
+            ) : null}
           </div>
           <div className="rounded-xl border border-line bg-white p-3">
             <dt className="text-xs text-muted">Type / units</dt>

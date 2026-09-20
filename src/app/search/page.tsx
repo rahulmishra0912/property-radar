@@ -77,7 +77,7 @@ export default async function SearchPage({
             </ul>
             {projects.length === 0 ? (
               <p className="mt-3 rounded-2xl border border-dashed border-line bg-cream/60 px-4 py-6 text-sm text-muted">
-                No matching projects in the Bengaluru seed. Try a locality like Whitefield, or a
+                No matching projects in the Bengaluru catalog. Try Brigade, Prestige, Sobha, or a
                 developer name.
               </p>
             ) : null}
