@@ -4,7 +4,25 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { RED_FLAG_CATEGORIES } from "@/lib/constants";
 
-export function RedFlagForm({ projectId }: { projectId: string }) {
+export function RedFlagForm({
+  projectId,
+  readOnly = false,
+}: {
+  projectId: string;
+  readOnly?: boolean;
+}) {
+  if (readOnly) {
+    return (
+      <p className="rounded-2xl border border-alert/15 bg-alert-soft/70 p-4 text-sm text-muted">
+        Red-flag reports on this hosted copy are from the catalog snapshot. New flags need the
+        Node server (`npm run dev`).
+      </p>
+    );
+  }
+  return <EditableRedFlagForm projectId={projectId} />;
+}
+
+function EditableRedFlagForm({ projectId }: { projectId: string }) {
   const router = useRouter();
   const [status, setStatus] = useState<"idle" | "saving" | "done" | "error">("idle");
   const [error, setError] = useState("");
@@ -104,12 +122,20 @@ export function RedFlagForm({ projectId }: { projectId: string }) {
   );
 }
 
-export function UpvoteButton({ id, initial }: { id: string; initial: number }) {
+export function UpvoteButton({
+  id,
+  initial,
+  readOnly = false,
+}: {
+  id: string;
+  initial: number;
+  readOnly?: boolean;
+}) {
   const [n, setN] = useState(initial);
   const [busy, setBusy] = useState(false);
 
   async function vote() {
-    if (busy) return;
+    if (busy || readOnly) return;
     setBusy(true);
     const res = await fetch(`/api/red-flags/${id}/upvote`, { method: "POST" });
     if (res.ok) {
@@ -123,7 +149,8 @@ export function UpvoteButton({ id, initial }: { id: string; initial: number }) {
     <button
       type="button"
       onClick={vote}
-      className="rounded-lg border border-line bg-white px-2 py-1 text-xs font-semibold text-navy hover:border-teal"
+      disabled={readOnly}
+      className="rounded-lg border border-line bg-white px-2 py-1 text-xs font-semibold text-navy hover:border-teal disabled:cursor-not-allowed disabled:opacity-70"
     >
       ▲ {n}
     </button>

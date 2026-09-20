@@ -26,6 +26,7 @@ If you already had the older fictional seed, run `npm run db:reset` once so sear
 | `npm run db:reset` | Recreate schema and seed |
 | `npm run build` | Production build (also ensures DB) |
 | `npm start` | Serve the production build (midnight refresh stays armed) |
+| `npm run build:pages` | Static export into `out/` for GitHub Pages |
 
 ## Environment
 
@@ -48,6 +49,25 @@ CRON_SECRET="replace-me"
 `NEXT_PUBLIC_SITE_URL` is used for canonical URLs, sitemap, and Open Graph `metadataBase`. `INGEST_SCHEDULE=0` turns off the in-process midnight timer. `CRON_SECRET` protects `GET`/`POST /api/ingestion/run` in production (Vercel Cron hits that path at 00:00 IST).
 
 To use Postgres later, point `DATABASE_URL` at Postgres and change `provider` in `prisma/schema.prisma` from `sqlite` to `postgresql`, then `npx prisma db push` and `npm run db:seed`.
+
+## GitHub Pages
+
+The site can be published as a static snapshot (catalog pages, client-side search, seeded reviews). Live review/flag APIs and midnight ingestion do not run on Pages.
+
+1. In the GitHub repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. Push to `main` (or run the **Deploy to GitHub Pages** workflow).
+3. The site is served at `https://rahulmishra0912.github.io/property-radar/`.
+
+Local static export (empty base path so you can open `out/` at `/`):
+
+```bash
+NEXT_PUBLIC_BASE_PATH= NEXT_PUBLIC_SITE_URL=http://localhost:3000 npm run build:pages
+npx serve out
+```
+
+For a custom domain, set `NEXT_PUBLIC_BASE_PATH` to empty and `NEXT_PUBLIC_SITE_URL` to your domain in `.github/workflows/pages.yml`.
+
+A `.nojekyll` file is included so GitHub does not ignore the `_next` asset folder.
 
 ## What you can do in the MVP
 

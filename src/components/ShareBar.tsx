@@ -1,13 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { STATIC_HOST, withBasePath } from "@/lib/site";
 
 export function ShareBar({ title, path }: { title: string; path: string }) {
   const [copied, setCopied] = useState(false);
 
   function url() {
-    if (typeof window === "undefined") return path;
-    return `${window.location.origin}${path}`;
+    const prefixed = withBasePath(path);
+    const trailing =
+      STATIC_HOST && !prefixed.endsWith("/") ? `${prefixed}/` : prefixed;
+    if (typeof window === "undefined") return trailing;
+    return `${window.location.origin}${trailing}`;
   }
 
   async function copy() {

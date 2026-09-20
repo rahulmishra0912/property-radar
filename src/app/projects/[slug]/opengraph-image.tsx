@@ -2,10 +2,18 @@ import { ImageResponse } from "next/og";
 import { prisma } from "@/lib/prisma";
 import { riskBand, riskScore } from "@/lib/risk";
 import { averageRating } from "@/lib/format";
+import { projectSlugParams } from "@/lib/static-params";
 
+export const runtime = "nodejs";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = "PropertyRadar report card";
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  return projectSlugParams();
+}
 
 const paper = "#f8f5ef";
 const cream = "#f3efe7";

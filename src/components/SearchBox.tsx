@@ -3,18 +3,24 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import {
+  filterSearchIndex,
+  type SearchIndex,
+} from "@/lib/client-search";
+import { withBasePath } from "@/lib/site";
 
-type Hit = {
-  projects: {
-    slug: string;
-    name: string;
-    locality: string;
-    reraId: string;
-    delayMonths: number;
-    developer: { name: string };
-  }[];
-  developers: { slug: string; name: string }[];
-};
+type Hit = ReturnType<typeof filterSearchIndex>;
+
+let indexPromise: Promise<SearchIndex> | null = null;
+
+function loadSearchIndex() {
+  if (!indexPromise) {
+    indexPromise = fetch(withBasePath("/search-index.json"))
+      .then((res) => (res.ok ? res.json() : { projects: [], developers: [] }))
+      .catch(() => ({ projects: [], developers: [] }));
+  }
+  return indexPromise;
+}
 
 export function SearchBox({
   autoFocus = false,
@@ -33,14 +39,17 @@ export function SearchBox({
   const skipAutoOpen = useRef(Boolean(initialQuery));
 
   useEffect(() => {
+    setQ(initialQuery);
+  }, [initialQuery]);
+
+  useEffect(() => {
     const t = setTimeout(async () => {
       if (q.trim().length < 1) {
         setHits({ projects: [], developers: [] });
         return;
       }
-      const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
-      if (!res.ok) return;
-      setHits(await res.json());
+      const index = await loadSearchIndex();
+      setHits(filterSearchIndex(index, q, 8));
       if (skipAutoOpen.current) {
         skipAutoOpen.current = false;
         return;
