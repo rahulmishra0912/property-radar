@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { BrandLogoImage } from "@/components/BrandLogo";
 import { SearchBox } from "@/components/SearchBox";
-import { withBasePath } from "@/lib/site";
 
 const NAV = [
   { href: "/search", label: "Search" },
@@ -18,15 +17,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-line/80 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
-        <Link href="/" className="inline-flex min-w-0 items-center" aria-label="PropertyRadar home">
-          <Image
-            src={withBasePath("/logo.png")}
-            alt="PropertyRadar"
-            width={1859}
-            height={516}
-            priority
-            className="h-9 w-auto max-w-[220px] object-contain object-left sm:h-11 sm:max-w-[280px]"
-          />
+        <Link href="/" className="inline-flex shrink-0 items-center" aria-label="PropertyRadar home">
+          <BrandLogoImage className="h-11 w-auto sm:h-12" />
         </Link>
         {showHeaderSearch ? (
           <div className="hidden min-w-0 flex-1 sm:block sm:max-w-md sm:px-3">

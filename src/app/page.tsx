@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandLogoImage } from "@/components/BrandLogo";
 import { DisclaimerBanner } from "@/components/SiteChrome";
 import { SEARCH_HINTS } from "@/lib/constants";
 import { SearchBox } from "@/components/SearchBox";
@@ -42,7 +43,8 @@ export default async function HomePage() {
     <main>
       <section className="bg-gradient-to-b from-cream/80 to-white px-4 pb-12 pt-10 md:pt-14">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-medium uppercase tracking-[0.22em] text-radar">
+          <BrandLogoImage className="mx-auto h-16 w-auto sm:h-20" />
+          <p className="mt-5 text-xs font-medium uppercase tracking-[0.22em] text-radar">
             Bengaluru · Karnataka RERA
           </p>
           <h1 className="serif mt-3 text-4xl font-semibold leading-tight tracking-tight text-ink md:text-5xl">
