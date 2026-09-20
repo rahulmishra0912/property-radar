@@ -1,4 +1,22 @@
 import Link from "next/link";
+import { withBasePath } from "@/lib/site";
+
+export function BrandLogoImage({
+  className = "h-12 w-auto",
+  alt = "PropertyRadar",
+}: {
+  className?: string;
+  alt?: string;
+}) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={withBasePath("/logo.png")}
+      alt={alt}
+      className={className}
+    />
+  );
+}
 
 const SAGE = "#8FA083";
 const RADAR = "#7A8B96";
