@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { DisclaimerBanner } from "@/components/SiteChrome";
+import { Crumbs, DisclaimerBanner } from "@/components/SiteChrome";
 import { FlagChip, OpinionTag, RecordTag, StatusBadge } from "@/components/Badges";
 import { StarRating } from "@/components/StarRating";
 import { ShareBar } from "@/components/ShareBar";
@@ -81,12 +81,13 @@ export default async function ProjectPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-        <Link href="/" className="hover:text-teal">
-          Home
-        </Link>{" "}
-        / Report card
-      </p>
+      <Crumbs
+        items={[
+          { href: "/", label: "Home" },
+          { href: "/search", label: "Search" },
+          { label: "Report card" },
+        ]}
+      />
       <div className="mt-3 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div>
           <h1 className="serif text-3xl text-navy md:text-4xl">{project.name}</h1>
@@ -129,34 +130,34 @@ export default async function ProjectPage({ params }: Props) {
             {summary.band.label} · {summary.score}/100
           </FlagChip>
         </div>
-        <dl className="mt-5 grid gap-4 text-sm sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <dt className="text-muted">
+        <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-xl border border-line bg-white p-3">
+            <dt className="flex items-center gap-2 text-xs text-muted">
               RERA ID <RecordTag />
             </dt>
             <dd className="mt-1 font-semibold break-all">{project.reraId}</dd>
           </div>
-          <div>
-            <dt className="text-muted">Type / units</dt>
+          <div className="rounded-xl border border-line bg-white p-3">
+            <dt className="text-xs text-muted">Type / units</dt>
             <dd className="mt-1 font-semibold">
               {PROJECT_TYPES[project.projectType] ?? project.projectType}
               {project.totalUnits ? ` · ${project.totalUnits} units` : ""}
             </dd>
           </div>
-          <div>
-            <dt className="text-muted">Registered</dt>
+          <div className="rounded-xl border border-line bg-white p-3">
+            <dt className="text-xs text-muted">Registered</dt>
             <dd className="mt-1 font-semibold">{formatDate(project.registeredOn)}</dd>
           </div>
-          <div>
-            <dt className="text-muted">RERA valid until</dt>
+          <div className="rounded-xl border border-line bg-white p-3">
+            <dt className="text-xs text-muted">RERA valid until</dt>
             <dd className="mt-1 font-semibold">{formatDate(project.validUntil)}</dd>
           </div>
-          <div>
-            <dt className="text-muted">Promised possession</dt>
+          <div className="rounded-xl border border-line bg-white p-3">
+            <dt className="text-xs text-muted">Promised possession</dt>
             <dd className="mt-1 font-semibold">{formatMonth(project.promisedPossession)}</dd>
           </div>
-          <div>
-            <dt className="text-muted">Actual / latest</dt>
+          <div className="rounded-xl border border-line bg-white p-3">
+            <dt className="text-xs text-muted">Actual / latest</dt>
             <dd className="mt-1 font-semibold">
               {project.actualPossession
                 ? formatMonth(project.actualPossession)
@@ -165,18 +166,18 @@ export default async function ProjectPage({ params }: Props) {
                   : "Pending (on calendar)"}
             </dd>
           </div>
-          <div>
-            <dt className="text-muted">Crowd rating</dt>
+          <div className="rounded-xl border border-line bg-white p-3">
+            <dt className="text-xs text-muted">Crowd rating</dt>
             <dd className="mt-1">
               <StarRating value={avg} count={project.reviews.length} />
             </dd>
           </div>
-          <div>
-            <dt className="text-muted">Share URL</dt>
+          <div className="rounded-xl border border-line bg-white p-3">
+            <dt className="text-xs text-muted">Share URL</dt>
             <dd className="mt-1 font-mono text-xs">/projects/{project.slug}</dd>
           </div>
         </dl>
-        <div className="mt-6 rounded-xl bg-cream px-4 py-4">
+        <div className="mt-6 rounded-xl border border-line bg-cream/80 px-4 py-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted">
             Plain-English risk note (heuristic)
           </p>
@@ -191,7 +192,7 @@ export default async function ProjectPage({ params }: Props) {
             <li key={p.slug}>
               <Link
                 href={`/projects/${p.slug}`}
-                className="flex items-center justify-between rounded-xl border border-line bg-paper px-4 py-3 text-sm hover:border-teal"
+                className="report-card flex items-center justify-between px-4 py-3 text-sm"
               >
                 <span>
                   <span className="font-semibold text-navy">{p.name}</span>
@@ -215,7 +216,7 @@ export default async function ProjectPage({ params }: Props) {
           </div>
           <ul className="mt-4 space-y-3">
             {project.reviews.map((r) => (
-              <li key={r.id} className="rounded-xl border border-line bg-paper p-4">
+              <li key={r.id} className="report-card rounded-xl p-4">
                 <div className="flex items-center justify-between gap-2">
                   <StarRating value={r.rating} />
                   <OpinionTag />
@@ -239,7 +240,7 @@ export default async function ProjectPage({ params }: Props) {
           </div>
           <ul className="mt-4 space-y-3">
             {project.redFlags.map((f) => (
-              <li key={f.id} className="rounded-xl border border-alert/15 bg-paper p-4">
+              <li key={f.id} className="report-card rounded-xl border-alert/20 p-4">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-wide text-alert">

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { DisclaimerBanner } from "@/components/SiteChrome";
+import { Crumbs, DisclaimerBanner } from "@/components/SiteChrome";
 import { StatusBadge } from "@/components/Badges";
 import { prisma } from "@/lib/prisma";
 import { averageRating, formatMonth } from "@/lib/format";
@@ -36,8 +36,8 @@ export default async function DeveloperPage({ params }: Props) {
 
   return (
     <main className="mx-auto w-full max-w-5xl px-4 py-8">
-      <p className="text-xs font-semibold uppercase tracking-wide text-muted">Developer</p>
-      <h1 className="serif mt-2 text-3xl text-navy md:text-4xl">{developer.name}</h1>
+      <Crumbs items={[{ href: "/", label: "Home" }, { href: "/search", label: "Search" }, { label: developer.name }]} />
+      <h1 className="serif mt-3 text-3xl text-navy md:text-4xl">{developer.name}</h1>
       <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">{developer.summary}</p>
       <p className="mt-2 text-sm text-muted">
         {developer.city}
