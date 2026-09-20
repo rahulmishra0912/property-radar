@@ -16,6 +16,10 @@
 # next.js
 /.next/
 /out/
+.pages-build-stash/
+
+# generated for static / GitHub Pages search
+/public/search-index.json
 
 # production
 /build

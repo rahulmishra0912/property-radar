@@ -13,8 +13,14 @@ import { averageRating, formatDate, formatMonth } from "@/lib/format";
 import { riskSummary } from "@/lib/risk";
 import { PROJECT_TYPES, RED_FLAG_CATEGORIES } from "@/lib/constants";
 import { CATALOG_SOURCE } from "@/ingestion/sync";
+import { STATIC_HOST } from "@/lib/site";
+import { projectSlugParams } from "@/lib/static-params";
 
-export const dynamic = "force-dynamic";
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  return projectSlugParams();
+}
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -221,7 +227,7 @@ export default async function ProjectPage({ params }: Props) {
           <h2 className="serif text-2xl text-navy">Star reviews</h2>
           <p className="mt-1 text-sm text-muted">All reviews are labelled opinions. Anonymous by default.</p>
           <div className="mt-4">
-            <ReviewForm projectId={project.id} />
+            <ReviewForm projectId={project.id} readOnly={STATIC_HOST} />
           </div>
           <ul className="mt-4 space-y-3">
             {project.reviews.map((r) => (
@@ -245,7 +251,7 @@ export default async function ProjectPage({ params }: Props) {
             Structured crowd reports. Upvote if you saw the same issue. Not a court record.
           </p>
           <div className="mt-4">
-            <RedFlagForm projectId={project.id} />
+            <RedFlagForm projectId={project.id} readOnly={STATIC_HOST} />
           </div>
           <ul className="mt-4 space-y-3">
             {project.redFlags.map((f) => (
@@ -257,7 +263,7 @@ export default async function ProjectPage({ params }: Props) {
                     </p>
                     <p className="mt-1 font-semibold text-navy">{f.title}</p>
                   </div>
-                  <UpvoteButton id={f.id} initial={f.upvotes} />
+                  <UpvoteButton id={f.id} initial={f.upvotes} readOnly={STATIC_HOST} />
                 </div>
                 <p className="mt-2 text-sm leading-6">{f.body}</p>
                 <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted">

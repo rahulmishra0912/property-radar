@@ -4,8 +4,6 @@ import { Crumbs, DisclaimerBanner } from "@/components/SiteChrome";
 import { prisma } from "@/lib/prisma";
 import { averageRating } from "@/lib/format";
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = { title: "Bengaluru leaderboard" };
 
 export default async function LeaderboardPage() {

@@ -6,8 +6,6 @@ import { FlagChip, StatusBadge } from "@/components/Badges";
 import { prisma } from "@/lib/prisma";
 import { averageRating, formatDateTime, formatMonth } from "@/lib/format";
 
-export const dynamic = "force-dynamic";
-
 export default async function HomePage() {
   const [delayed, rated, sample, lastRun] = await Promise.all([
     prisma.project.findMany({
@@ -62,7 +60,7 @@ export default async function HomePage() {
             {SEARCH_HINTS.map((hint) => (
               <Link
                 key={hint}
-                href={`/search?q=${encodeURIComponent(hint === "PRM/KA" ? "PRM" : hint)}`}
+                href={`/search?q=${encodeURIComponent(hint)}`}
                 className="rounded-full border border-line bg-white px-3 py-1 text-xs font-medium text-navy-2 hover:border-teal hover:text-teal"
               >
                 Try {hint}

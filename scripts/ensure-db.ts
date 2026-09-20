@@ -22,14 +22,17 @@ async function main() {
     if (n === 0) {
       await prisma.$disconnect();
       execSync("npx tsx prisma/seed.ts", { stdio: "inherit", cwd: root });
-      return;
+    } else {
+      const { runCatalogRefresh } = await import("../src/ingestion/sync");
+      await runCatalogRefresh(prisma);
+      await prisma.$disconnect();
     }
-
-    const { runCatalogRefresh } = await import("../src/ingestion/sync");
-    await runCatalogRefresh(prisma);
-  } finally {
-    await prisma.$disconnect();
+  } catch (error) {
+    await prisma.$disconnect().catch(() => undefined);
+    throw error;
   }
+
+  execSync("npx tsx scripts/export-search-index.ts", { stdio: "inherit", cwd: root });
 }
 
 main().catch((error) => {

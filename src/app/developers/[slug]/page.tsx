@@ -5,8 +5,13 @@ import { Crumbs, DisclaimerBanner } from "@/components/SiteChrome";
 import { StatusBadge } from "@/components/Badges";
 import { prisma } from "@/lib/prisma";
 import { averageRating, formatMonth } from "@/lib/format";
+import { developerSlugParams } from "@/lib/static-params";
 
-export const dynamic = "force-dynamic";
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  return developerSlugParams();
+}
 
 type Props = { params: Promise<{ slug: string }> };
 

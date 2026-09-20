@@ -3,7 +3,25 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export function ReviewForm({ projectId }: { projectId: string }) {
+export function ReviewForm({
+  projectId,
+  readOnly = false,
+}: {
+  projectId: string;
+  readOnly?: boolean;
+}) {
+  if (readOnly) {
+    return (
+      <p className="rounded-2xl border border-line bg-cream/60 p-4 text-sm text-muted">
+        This GitHub Pages snapshot is read-only. Catalogued reviews still appear below; new
+        submissions need the Node server (`npm run dev`).
+      </p>
+    );
+  }
+  return <EditableReviewForm projectId={projectId} />;
+}
+
+function EditableReviewForm({ projectId }: { projectId: string }) {
   const router = useRouter();
   const [status, setStatus] = useState<"idle" | "saving" | "done" | "error">("idle");
   const [error, setError] = useState("");
