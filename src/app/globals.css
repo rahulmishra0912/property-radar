@@ -1,22 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --navy: #0b1f33;
-  --navy-2: #14324c;
-  --teal: #0f7b77;
-  --teal-2: #14918c;
-  --cream: #f4efe6;
-  --paper: #fffcf7;
-  --ink: #1c2834;
-  --muted: #5b6b7a;
-  --line: #d9d1c3;
-  --alert: #b42318;
-  --alert-soft: #fde8e6;
-  --ok: #0f6b4c;
-  --ok-soft: #e4f4ec;
-  --warn: #b45309;
-  --warn-soft: #fef3c7;
-  --star: #d4a017;
+  --cream: #f3efe7;
+  --paper: #f8f5ef;
+  --ink: #2f2f2f;
+  --navy: #2f2f2f;
+  --navy-2: #4a4a4a;
+  --teal: #7f9474;
+  --teal-2: #8fa083;
+  --radar: #7a8b96;
+  --muted: #6d757c;
+  --line: #ddd8ce;
+  --alert: #b56b5c;
+  --alert-soft: #f4ebe7;
+  --ok: #6f8766;
+  --ok-soft: #e7eee4;
+  --warn: #a8885c;
+  --warn-soft: #f3ece3;
+  --star: #c4a46a;
 }
 
 @theme inline {
@@ -24,6 +25,7 @@
   --color-navy-2: var(--navy-2);
   --color-teal: var(--teal);
   --color-teal-2: var(--teal-2);
+  --color-radar: var(--radar);
   --color-cream: var(--cream);
   --color-paper: var(--paper);
   --color-ink: var(--ink);
@@ -42,7 +44,7 @@
 
 html,
 body {
-  background: var(--cream);
+  background: var(--paper);
   color: var(--ink);
 }
 
@@ -55,8 +57,7 @@ body {
 }
 
 .report-card {
-  background: var(--paper);
-  box-shadow:
-    0 1px 0 rgba(11, 31, 51, 0.04),
-    0 18px 40px rgba(11, 31, 51, 0.08);
+  background: var(--cream);
+  border: 1px solid var(--line);
+  box-shadow: none;
 }

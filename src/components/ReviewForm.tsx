@@ -92,7 +92,7 @@ export function ReviewForm({ projectId }: { projectId: string }) {
       <button
         type="submit"
         disabled={status === "saving"}
-        className="rounded-lg bg-navy px-4 py-2 text-sm font-semibold text-white disabled:opacity-60"
+        className="rounded-lg bg-teal px-4 py-2 text-sm font-semibold text-paper disabled:opacity-60"
       >
         {status === "saving" ? "Saving…" : "Publish review"}
       </button>

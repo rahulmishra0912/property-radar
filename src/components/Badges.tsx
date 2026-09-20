@@ -5,7 +5,7 @@ const TONE: Record<string, string> = {
   EXTENDED: "bg-warn-soft text-warn",
   LAPSED: "bg-alert-soft text-alert",
   EXPIRED: "bg-alert-soft text-alert",
-  REVOKED: "bg-alert text-white",
+  REVOKED: "bg-alert text-paper",
 };
 
 export function StatusBadge({ status }: { status: string }) {
@@ -50,7 +50,7 @@ export function OpinionTag() {
 
 export function RecordTag() {
   return (
-    <span className="inline-flex rounded border border-teal/30 bg-teal/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-teal">
+    <span className="inline-flex rounded border border-radar/30 bg-radar/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-radar">
       Structured record
     </span>
   );

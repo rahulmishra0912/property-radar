@@ -16,13 +16,13 @@ const serif = Source_Serif_4({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: {
-    default: "Property Radar — Bengaluru project report cards",
-    template: "%s · Property Radar",
+    default: "PropertyRadar — Bengaluru project report cards",
+    template: "%s · PropertyRadar",
   },
   description:
     "Search a Bengaluru project or Karnataka RERA ID and open an instant due-diligence report card. Informational only — verify independently.",
   openGraph: {
-    siteName: "Property Radar",
+    siteName: "PropertyRadar",
     type: "website",
     locale: "en_IN",
   },

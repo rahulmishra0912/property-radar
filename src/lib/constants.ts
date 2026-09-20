@@ -1,4 +1,5 @@
-export const BRAND = "Property Radar";
+export const BRAND = "PropertyRadar";
+export const TAGLINE = "Real estate due-diligence platform";
 export const CITY = "Bengaluru";
 export const STATE = "Karnataka";
 

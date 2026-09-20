@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${project.name} report card`,
     description: `${project.name} in ${project.locality}, Bengaluru. RERA ${project.reraId}. Informational only.`,
-    openGraph: { title: `${project.name} · Property Radar`, description: project.reraId },
+    openGraph: { title: `${project.name} · PropertyRadar`, description: project.reraId },
     alternates: { canonical: `/projects/${project.slug}` },
   };
 }
@@ -109,8 +109,8 @@ export default async function ProjectPage({ params }: Props) {
         className="report-card mt-6 rounded-2xl border border-line p-5 md:p-7"
       >
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal">
-            Property Radar · report card
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-radar">
+            PropertyRadar · report card
           </p>
           <p className="text-xs text-muted">Last verified {formatDate(project.lastVerifiedAt)}</p>
         </div>

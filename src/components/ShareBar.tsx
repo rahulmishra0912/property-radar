@@ -17,13 +17,13 @@ export function ShareBar({ title, path }: { title: string; path: string }) {
   }
 
   function whatsapp() {
-    const text = `${title} — Property Radar report card\n${url()}\nInformational only; verify independently.`;
+    const text = `${title} — PropertyRadar report card\n${url()}\nInformational only; verify independently.`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank", "noopener");
   }
 
   async function nativeShare() {
     if (navigator.share) {
-      await navigator.share({ title, text: `${title} · Property Radar`, url: url() });
+      await navigator.share({ title, text: `${title} · PropertyRadar`, url: url() });
     } else {
       await copy();
     }
@@ -34,7 +34,7 @@ export function ShareBar({ title, path }: { title: string; path: string }) {
       <button
         type="button"
         onClick={whatsapp}
-        className="rounded-lg bg-[#25D366] px-3 py-2 text-sm font-semibold text-white"
+        className="rounded-lg bg-ok px-3 py-2 text-sm font-semibold text-paper"
       >
         WhatsApp
       </button>
