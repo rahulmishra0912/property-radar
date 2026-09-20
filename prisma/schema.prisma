@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Developer {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  name        String
+  shortName   String
+  city        String    @default("Bengaluru")
+  foundedYear Int?
+  summary     String
+  projects    Project[]
+}
+
+model Project {
+  id                 String    @id @default(cuid())
+  slug               String    @unique
+  name               String
+  locality           String
+  city               String    @default("Bengaluru")
+  state              String    @default("Karnataka")
+  reraId             String    @unique
+  reraStatus         String
+  registeredOn       DateTime
+  validUntil         DateTime
+  promisedPossession DateTime
+  actualPossession   DateTime?
+  delayMonths        Int       @default(0)
+  litigationFlag     Boolean   @default(false)
+  consumerCourtFlag  Boolean   @default(false)
+  projectType        String
+  totalUnits         Int?
+  lastVerifiedAt     DateTime
+  developerId        String
+  developer          Developer @relation(fields: [developerId], references: [id], onDelete: Cascade)
+  reviews            Review[]
+  redFlags           RedFlag[]
+
+  @@index([name])
+  @@index([reraId])
+  @@index([locality])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  rating    Int
+  title     String
+  body      String
+  author    String   @default("Anonymous homebuyer")
+  createdAt DateTime @default(now())
+
+  @@index([projectId])
+}
+
+model RedFlag {
+  id         String   @id @default(cuid())
+  projectId  String
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  category   String
+  title      String
+  body       String
+  upvotes    Int      @default(0)
+  proofLabel String?
+  createdAt  DateTime @default(now())
+
+  @@index([projectId])
+  @@index([category])
+}
