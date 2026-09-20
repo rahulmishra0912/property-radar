@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DisclaimerBanner } from "@/components/SiteChrome";
+import { Crumbs, DisclaimerBanner } from "@/components/SiteChrome";
 import { prisma } from "@/lib/prisma";
 import { averageRating } from "@/lib/format";
 
@@ -35,10 +35,10 @@ export default async function LeaderboardPage() {
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-8">
-      <h1 className="serif text-3xl text-navy">Bengaluru leaderboard</h1>
+      <Crumbs items={[{ href: "/", label: "Home" }, { label: "Leaderboard" }]} />
+      <h1 className="serif mt-3 text-3xl text-navy">Bengaluru leaderboard</h1>
       <p className="mt-2 max-w-2xl text-sm text-muted">
-        Ranked from this MVP seed — not official RERA rankings. Use it to compare, then open the
-        report card.
+        Ranked from this MVP seed — not official RERA rankings. Compare, then open a report card.
       </p>
       <div className="mt-4">
         <DisclaimerBanner compact />
@@ -51,14 +51,21 @@ export default async function LeaderboardPage() {
               <li key={p.id}>
                 <Link
                   href={`/projects/${p.slug}`}
-                  className="flex items-center justify-between rounded-xl border border-line bg-paper px-4 py-3"
+                  className="report-card flex items-center justify-between px-4 py-3"
                 >
-                  <span className="pr-3">
-                    <span className="mr-2 text-xs text-muted">{i + 1}.</span>
-                    <span className="font-semibold text-navy">{p.name}</span>
-                    <span className="block text-xs text-muted">{p.developer.shortName}</span>
+                  <span className="flex min-w-0 items-start gap-3 pr-3">
+                    <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-alert-soft text-xs font-semibold text-alert">
+                      {i + 1}
+                    </span>
+                    <span>
+                      <span className="font-semibold text-navy">{p.name}</span>
+                      <span className="block text-xs text-muted">{p.developer.shortName}</span>
+                    </span>
                   </span>
-                  <span className="shrink-0 font-semibold text-alert">{p.delayMonths} mo</span>
+                  <span className="shrink-0 text-right">
+                    <span className="block font-semibold text-alert">{p.delayMonths} mo</span>
+                    <span className="text-xs font-semibold text-teal">Open →</span>
+                  </span>
                 </Link>
               </li>
             ))}
@@ -71,14 +78,21 @@ export default async function LeaderboardPage() {
               <li key={p.id}>
                 <Link
                   href={`/projects/${p.slug}`}
-                  className="flex items-center justify-between rounded-xl border border-line bg-paper px-4 py-3"
+                  className="report-card flex items-center justify-between px-4 py-3"
                 >
-                  <span className="pr-3">
-                    <span className="mr-2 text-xs text-muted">{i + 1}.</span>
-                    <span className="font-semibold text-navy">{p.name}</span>
-                    <span className="block text-xs text-muted">{p.reviews.length} opinions</span>
+                  <span className="flex min-w-0 items-start gap-3 pr-3">
+                    <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ok-soft text-xs font-semibold text-ok">
+                      {i + 1}
+                    </span>
+                    <span>
+                      <span className="font-semibold text-navy">{p.name}</span>
+                      <span className="block text-xs text-muted">{p.reviews.length} opinions</span>
+                    </span>
                   </span>
-                  <span className="shrink-0 font-semibold text-ok">{p.avg?.toFixed(1)}</span>
+                  <span className="shrink-0 text-right">
+                    <span className="block font-semibold text-ok">{p.avg?.toFixed(1)}</span>
+                    <span className="text-xs font-semibold text-teal">Open →</span>
+                  </span>
                 </Link>
               </li>
             ))}
@@ -92,10 +106,13 @@ export default async function LeaderboardPage() {
             <li key={d.id}>
               <Link
                 href={`/developers/${d.slug}`}
-                className="flex items-center justify-between rounded-xl border border-line bg-paper px-4 py-3"
+                className="report-card flex items-center justify-between px-4 py-3"
               >
                 <span className="font-semibold text-navy">{d.name}</span>
-                <span className="text-sm text-alert">{d.avgDelay} mo avg</span>
+                <span className="text-right">
+                  <span className="block text-sm text-alert">{d.avgDelay} mo avg</span>
+                  <span className="text-xs font-semibold text-teal">Open →</span>
+                </span>
               </Link>
             </li>
           ))}

@@ -1,23 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #f3efe7;
+  --cream: #f4f7fb;
   --paper: #ffffff;
-  --ink: #2f2f2f;
-  --navy: #2f2f2f;
-  --navy-2: #4a4a4a;
-  --teal: #7f9474;
-  --teal-2: #8fa083;
-  --radar: #7a8b96;
-  --muted: #6d757c;
-  --line: #ddd8ce;
-  --alert: #b56b5c;
-  --alert-soft: #f4ebe7;
-  --ok: #6f8766;
-  --ok-soft: #e7eee4;
-  --warn: #a8885c;
-  --warn-soft: #f3ece3;
-  --star: #c4a46a;
+  --ink: #243044;
+  --navy: #1f3a4d;
+  --navy-2: #3d5668;
+  --teal: #4f8f7b;
+  --teal-2: #3f7a68;
+  --radar: #6b8aa0;
+  --muted: #64748b;
+  --line: #e4eaf0;
+  --alert: #c45c4e;
+  --alert-soft: #fdf4f2;
+  --ok: #3d8a6a;
+  --ok-soft: #eef8f3;
+  --warn: #b8893a;
+  --warn-soft: #fff8ec;
+  --star: #e0b04a;
 }
 
 @theme inline {
@@ -57,7 +57,35 @@ body {
 }
 
 .report-card {
-  background: var(--cream);
+  background: #ffffff;
   border: 1px solid var(--line);
-  box-shadow: none;
+  box-shadow: 0 1px 2px rgba(31, 58, 77, 0.04);
+}
+
+a.report-card,
+button.report-card {
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+a.report-card:hover,
+button.report-card:hover {
+  border-color: color-mix(in srgb, var(--teal) 35%, var(--line));
+  box-shadow: 0 8px 20px rgba(31, 58, 77, 0.06);
+}
+
+.field {
+  width: 100%;
+  border-radius: 0.7rem;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  padding: 0.5rem 0.75rem;
+  color: var(--ink);
+  outline: none;
+}
+
+.field:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--teal) 18%, transparent);
 }

@@ -29,3 +29,5 @@ export const RERA_STATUS_LABEL: Record<string, string> = {
 
 export const DISCLAIMER =
   "Informational only — not legal or financial advice. Verify independently on Karnataka RERA and other public records before you act.";
+
+export const SEARCH_HINTS = ["Whitefield", "Summit", "Hebbal", "PRM/KA"] as const;

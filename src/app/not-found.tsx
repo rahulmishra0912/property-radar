@@ -8,9 +8,12 @@ export default function NotFound() {
       <BrandMark className="mx-auto h-12 w-12" />
       <h1 className="serif mt-4 text-3xl text-navy">Not in our Bengaluru file</h1>
       <p className="mt-3 text-sm text-muted">
-        That URL is not a seeded project or developer. Try search.
+        That URL is not a seeded project or developer. Search by name, locality, or RERA ID.
       </p>
-      <Link href="/search" className="mt-6 inline-block font-semibold text-teal">
+      <Link
+        href="/search"
+        className="mt-6 inline-flex rounded-full bg-teal px-4 py-2 text-sm font-semibold text-white hover:bg-teal-2"
+      >
         Back to search
       </Link>
     </main>

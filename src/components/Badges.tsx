@@ -5,7 +5,7 @@ const TONE: Record<string, string> = {
   EXTENDED: "bg-warn-soft text-warn",
   LAPSED: "bg-alert-soft text-alert",
   EXPIRED: "bg-alert-soft text-alert",
-  REVOKED: "bg-alert text-paper",
+  REVOKED: "bg-alert-soft text-alert",
 };
 
 export function StatusBadge({ status }: { status: string }) {

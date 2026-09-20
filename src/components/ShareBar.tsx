@@ -34,21 +34,21 @@ export function ShareBar({ title, path }: { title: string; path: string }) {
       <button
         type="button"
         onClick={whatsapp}
-        className="rounded-lg bg-ok px-3 py-2 text-sm font-semibold text-paper"
+        className="rounded-xl bg-ok-soft px-3 py-2 text-sm font-semibold text-ok hover:bg-ok hover:text-white"
       >
         WhatsApp
       </button>
       <button
         type="button"
         onClick={copy}
-        className="rounded-lg border border-line bg-paper px-3 py-2 text-sm font-semibold text-navy"
+        className="rounded-xl border border-line bg-white px-3 py-2 text-sm font-semibold text-navy hover:border-teal"
       >
         {copied ? "Link copied" : "Copy link"}
       </button>
       <button
         type="button"
         onClick={nativeShare}
-        className="rounded-lg border border-line bg-paper px-3 py-2 text-sm font-semibold text-navy"
+        className="rounded-xl border border-line bg-white px-3 py-2 text-sm font-semibold text-navy hover:border-teal"
       >
         Share
       </button>
