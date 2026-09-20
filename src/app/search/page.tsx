@@ -35,7 +35,7 @@ export default async function SearchPage({
                 <li key={p.id}>
                   <Link
                     href={`/projects/${p.slug}`}
-                    className="report-card block rounded-xl p-4 hover:ring-2 hover:ring-teal/30"
+                    className="report-card block rounded-xl p-4 hover:border-radar/40"
                   >
                     <div className="flex flex-wrap items-center gap-2">
                       <StatusBadge status={p.reraStatus} />

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { DisclaimerBanner } from "@/components/SiteChrome";
 import { SearchBox } from "@/components/SearchBox";
 import { FlagChip, StatusBadge } from "@/components/Badges";
@@ -37,15 +38,25 @@ export default async function HomePage() {
 
   return (
     <main>
-      <section className="bg-navy px-4 pb-16 pt-10 text-cream md:pt-16">
+      <section className="px-4 pb-16 pt-10 md:pt-16">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-2">
+          <div className="flex justify-center">
+            <Image
+              src="/logo.png"
+              alt="PropertyRadar — Real estate due-diligence platform"
+              width={974}
+              height={284}
+              priority
+              className="h-20 w-auto max-w-full object-contain sm:h-24"
+            />
+          </div>
+          <p className="mt-8 text-xs font-medium uppercase tracking-[0.22em] text-radar">
             Bengaluru · Karnataka RERA
           </p>
-          <h1 className="serif mt-3 text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
+          <h1 className="serif mt-3 text-4xl font-semibold leading-tight tracking-tight text-ink md:text-5xl">
             Type a project. Open the report card.
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-cream/75 md:text-base">
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-muted md:text-base">
             Instant due-diligence for homebuyers: RERA status, promised vs actual
             possession, litigation flags, and crowd reviews — built to forward on
             WhatsApp.
@@ -53,7 +64,7 @@ export default async function HomePage() {
           <div className="mt-8 text-left text-ink">
             <SearchBox autoFocus />
           </div>
-          <p className="mt-3 text-xs text-cream/55">
+          <p className="mt-3 text-xs text-muted">
             Try “Whitefield”, “Summit”, or a PRM/KA/RERA id from any report card.
           </p>
         </div>
@@ -97,7 +108,7 @@ export default async function HomePage() {
             <Link
               key={p.id}
               href={`/projects/${p.slug}`}
-              className="report-card rounded-2xl p-5 hover:ring-2 hover:ring-teal/30"
+              className="report-card rounded-2xl p-5 hover:border-radar/40"
             >
               <div className="flex flex-wrap items-center gap-2">
                 <StatusBadge status={p.reraStatus} />
@@ -123,7 +134,7 @@ export default async function HomePage() {
             <Link
               key={p.id}
               href={`/projects/${p.slug}`}
-              className="report-card rounded-2xl p-5 hover:ring-2 hover:ring-teal/30"
+              className="report-card rounded-2xl p-5 hover:border-radar/40"
             >
               <p className="font-semibold text-navy">{p.name}</p>
               <p className="text-sm text-muted">

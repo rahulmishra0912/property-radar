@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!developer) return { title: "Developer" };
   return {
     title: developer.name,
-    description: `${developer.name} Bengaluru projects on Property Radar. Informational only.`,
+    description: `${developer.name} Bengaluru projects on PropertyRadar. Informational only.`,
   };
 }
 

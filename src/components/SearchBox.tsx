@@ -62,8 +62,8 @@ export function SearchBox({
 
   const inputClass =
     size === "lg"
-      ? "h-14 w-full rounded-xl border border-line bg-paper pl-12 pr-28 text-base text-ink shadow-sm outline-none ring-teal/30 placeholder:text-muted focus:border-teal focus:ring-2"
-      : "h-11 w-full rounded-lg border border-line bg-paper pl-10 pr-24 text-sm outline-none ring-teal/30 placeholder:text-muted focus:border-teal focus:ring-2";
+      ? "h-14 w-full rounded-xl border border-line bg-paper pl-12 pr-28 text-base text-ink outline-none ring-radar/25 placeholder:text-muted focus:border-radar focus:ring-2"
+      : "h-11 w-full rounded-lg border border-line bg-paper pl-10 pr-24 text-sm outline-none ring-radar/25 placeholder:text-muted focus:border-radar focus:ring-2";
 
   return (
     <div ref={boxRef} className="relative w-full">
@@ -82,13 +82,13 @@ export function SearchBox({
         />
         <button
           type="submit"
-          className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg bg-teal px-3 py-2 text-sm font-semibold text-white hover:bg-teal-2"
+          className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg bg-teal px-3 py-2 text-sm font-semibold text-paper hover:bg-teal-2"
         >
           Search
         </button>
       </form>
       {open && (hits.projects.length > 0 || hits.developers.length > 0) && (
-        <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-xl border border-line bg-paper shadow-lg">
+        <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-xl border border-line bg-paper">
           {hits.projects.length > 0 && (
             <ul className="max-h-80 overflow-auto py-1">
               {hits.projects.map((p) => (
