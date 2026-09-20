@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+:root {
+  --navy: #0b1f33;
+  --navy-2: #14324c;
+  --teal: #0f7b77;
+  --teal-2: #14918c;
+  --cream: #f4efe6;
+  --paper: #fffcf7;
+  --ink: #1c2834;
+  --muted: #5b6b7a;
+  --line: #d9d1c3;
+  --alert: #b42318;
+  --alert-soft: #fde8e6;
+  --ok: #0f6b4c;
+  --ok-soft: #e4f4ec;
+  --warn: #b45309;
+  --warn-soft: #fef3c7;
+  --star: #d4a017;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
+  --color-teal: var(--teal);
+  --color-teal-2: var(--teal-2);
+  --color-cream: var(--cream);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-alert: var(--alert);
+  --color-alert-soft: var(--alert-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-star: var(--star);
+  --font-sans: var(--font-plus-jakarta);
+  --font-serif: var(--font-source-serif);
+}
+
+html,
+body {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.serif {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+.report-card {
+  background: var(--paper);
+  box-shadow:
+    0 1px 0 rgba(11, 31, 51, 0.04),
+    0 18px 40px rgba(11, 31, 51, 0.08);
+}
